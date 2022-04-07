@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { List, FAB } from "react-native-paper";
 import format from "date-fns/format";
@@ -21,6 +21,13 @@ const memo = [
 
 export const MainScreen = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const initialize = async () => {
+
+    }
+    const unsubscribe = navigation.addListener('focus', initialize);
+  }, [navigation]);
 
   const onPressAdd = () => {
     navigation.navigate('Compose');
