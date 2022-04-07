@@ -1,30 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { List, FAB } from "react-native-paper";
 import format from "date-fns/format";
 import { useNavigation } from "@react-navigation/native";
-
-const memo = [
-    {
-      text: 'メモ1',
-      createdAt: 1585574700000,
-    },
-    {
-      text: 'メモ2',
-      createdAt: 1585574700000,
-    },
-    {
-      text: 'メモ3',
-      createdAt: 1585574700000,
-    },
-  ];
+import { loadAll } from "../storage";
 
 export const MainScreen = () => {
   const navigation = useNavigation();
+  const [memos, setMemos] = useState([]);
 
   useEffect(() => {
     const initialize = async () => {
-
+      const newMemos: any = await loadAll();
+      setMemos(newMemos);
     }
     const unsubscribe = navigation.addListener('focus', initialize);
   }, [navigation]);
@@ -37,9 +25,9 @@ export const MainScreen = () => {
     <View style={styles.container}>
       <FlatList
         style={styles.list}
-        data={memo}
+        data={memos}
         keyExtractor={item => '${item.createdAt}'}
-        renderItem={({item}) => (
+        renderItem={({item}: any) => (
           <List.Item
             title={item.text}
             titleNumberOfLines={5}

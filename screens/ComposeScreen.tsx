@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet, KeyboardAvoidingView } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { StyleSheet, KeyboardAvoidingView, TextInput } from "react-native";
+import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { save } from "../storage";
 
@@ -17,7 +17,6 @@ export const ComposeScreen = () => {
     <KeyboardAvoidingView style={styles.container}>
       <TextInput
         style={{ marginBottom: 16 }}
-        mode="outlined"
         placeholder="メモを入力してください"
         multiline
         onChangeText={(text) => setText(text)}
